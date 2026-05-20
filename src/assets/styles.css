@@ -1,0 +1,274 @@
+:root {
+  --primary-color: #4f46e5;
+  --primary-light: #6366f1;
+  --primary-dark: #4338ca;
+  --secondary-color: #10b981;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --user-message: #e0e7ff;
+  --bot-message: #f1f5f9;
+  --danger-color: #ef4444;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius: 4px !important; /* 强制4px圆角 */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 强制所有元素使用4px圆角 */
+*:not(.markdown-container):not(.markdown-content):not(.session-item):not(.chat-input) {
+  border-radius: 8px !important;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 强制按钮样式 */
+button, 
+button.primary, 
+button.secondary, 
+button.danger,
+input, 
+textarea,
+.card,
+.error-message {
+  border-radius: 8px !important;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+button:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+button.primary {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+}
+
+button.primary:hover:not(:disabled) {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3) !important;
+}
+
+button.primary:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2) !important;
+}
+
+button.secondary {
+  background-color: #6b7280;
+  color: white;
+  box-shadow: 0 2px 4px rgba(107, 114, 128, 0.2);
+}
+
+button.secondary:hover:not(:disabled) {
+  background-color: #4b5563;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(107, 114, 128, 0.3) !important;
+}
+
+button.danger {
+  background-color: var(--danger-color);
+  color: white;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+button.danger:hover:not(:disabled) {
+  background-color: #dc2626;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* 强制禁用状态样式 */
+button:disabled {
+  background-color: #9ca3af !important;
+  color: #6b7280 !important;
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+button:disabled::after {
+  display: none;
+}
+
+input, textarea {
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background: white;
+  width: 100%;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 1px !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+  transform: translateY(-1px);
+}
+
+.card {
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.error-message {
+  color: var(--danger-color);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 2px solid rgba(239, 68, 68, 0.3) !important;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-message::before {
+  content: "⚠️";
+  font-size: 1.1em;
+}
+
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(79, 70, 229, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 强制阴影类 */
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* 强制无障碍优化 */
+button:focus, 
+input:focus, 
+textarea:focus,
+[tabindex]:focus {
+  outline: 3px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1) !important;
+}
+
+/* 会话项特殊处理 */
+.session-item {
+  border-radius: 4px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.session-item:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 输入框容器特殊处理 */
+.chat-input-container {
+  border-radius: 4px !important;
+}
+
+.chat-input {
+  border-radius: 4px !important;
+}
+
+/* Markdown 容器特殊处理 */
+.markdown-container {
+  border-radius: 4px !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .card {
+    padding: 1rem;
+  }
+  
+  button {
+    padding: 0.75rem 1rem; /* 移动端更大点击区域 */
+  }
+}
+
+/* 强制覆盖Vue组件内联样式 */
+[vue-component] {
+  border-radius: 4px !important;
+}
+
+/* 为所有可能包含圆角的元素设置 */
+div, section, article, aside, header, footer, nav, main {
+  border-radius: 4px !important;
+}
